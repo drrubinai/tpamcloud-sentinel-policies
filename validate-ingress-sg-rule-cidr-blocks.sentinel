@@ -1,6 +1,6 @@
 # This policy uses the Sentinel tfplan/v2 import to validate that no security group
-# rules have the CIDR "0.0.0.0/0".  It covers both the aws_security_group and
-# the aws_security_group_rule resources which can both define rules.
+# rules contains the CIDR other than the ones provided in a valid_cidr list.  
+# It covers both the aws_security_group and the aws_security_group_rule resources which can both define rules.
 
 # Import the tfplan/v2 import, but use the alias "tfplan"
 import "tfplan/v2" as tfplan
@@ -37,10 +37,8 @@ for allSGs as address, sg {
   ingressRules = plan.find_blocks(sg, "ingress")
 
   # Filter to violating CIDR blocks
-  # Warnings will not be printed for violations since the last parameter is false
-  violatingIRs = plan.filter_attribute_contains_items_from_list(ingressRules,
-                 "cidr_blocks", valid_cidrs, false)
-
+  # Warnings will  be printed for violations since the last parameter is true
+  violatingIRs = plan.filter_attribute_not_in_list(ingressRules, "cidr_blocks",valid_cidrs, true)
   # Print violation messages
   if length(violatingIRs["messages"]) > 0 {
     violatingSGsCount += 1
