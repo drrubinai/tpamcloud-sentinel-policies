@@ -48,12 +48,7 @@ for allSGs as address, sg {
     print("SG Ingress Violation:", address, "has at least one ingress rule",
           "with forbidden cidr blocks")
     plan.print_violations(violatingIRs["messages"], "Ingress Rule\n")
-  }  
-  else {
-    print("SG is Verified:", address, "has ** NO ingress violations ** rule",
-          "found.")  
-  }
-  // end if
+  }   // end if
 
 } // end for SGs
 
