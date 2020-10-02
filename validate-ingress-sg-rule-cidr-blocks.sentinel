@@ -50,6 +50,10 @@ for allSGs as address, sg {
     plan.print_violations(violatingIRs["messages"], "Ingress Rule\n")
   }   // end if
 
+  if length(violatingIRs["messages"]) is 0 {
+    print("SG Verified:", address, "**NO** ingress rule","violations")
+  }
+
 } // end for SGs
 
 # Main rule
