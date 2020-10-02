@@ -10,3 +10,7 @@ policy "validate-ingress-sg-rule-cidr-blocks" {
     enforcement_level = "advisory"
 }
 
+policy "restrict-aws-cidr-blocks" {
+    enforcement_level = "advisory"
+}
+

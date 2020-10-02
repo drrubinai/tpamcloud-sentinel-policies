@@ -859,8 +859,8 @@ filter_attribute_not_found_in_a_list = func(resources, attr, required, prtmsg) {
       if length(missing_values) > 0 {
         # Build warning message when v is a map
         message = to_string(address) + " has " + to_string(attr) + " " +
-                  to_string(v) + " the values do not match with the valid items " +
-                  to_string(missing_values) + " from the list: " +
+                  to_string(v) + " the cidr(s) do not match with the valid cidrs is " +
+                  to_string(missing_values) + " where valid cidr list is: " +
                   to_string(required)
         # Add the resource and warning message to the violators list
         violators[address] = rc
